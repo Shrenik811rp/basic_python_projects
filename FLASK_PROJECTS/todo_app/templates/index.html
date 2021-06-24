@@ -5,17 +5,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo APP</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 </head>
 <body>
-    <h1>To do app</h1>
+    <h1 style="font-size:50px;margin-top: 20px;" class="ui center aligned header">To do app</h1>
 
-    <form action="">
-        <div>
+    <!-- /add: is called in the form to add values to the input tags
+    
+    using add() function in py file-->
+    <form class="ui center aligned form" action="/add", method="POST">
+        <div class="field">
 
-            <label for="title">Todo task</label>
-            <input type="text" name="title" placeholder="Enter task">
-            <button type="submit">Add task</button>
+            <label for="title" style="text-align: center;margin-top: 50px; font-size: 30px;margin-bottom: 30px;">What do you want to do today?</label>
+            <input style="text-align: center;font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" type="text" name="title" placeholder="Enter task to perform">
+            <button style="width: 100%;margin-top:20px;" class="ui blue button" type="submit">Add Task</button>
         </div>
     </form>
+
+    {% for todo in todo_list %}
+    <div class="ui center aligned segment">
+        <p style="margin-top:20px;font-size:25px;font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="ui big header">{{todo.id}})  {{todo.title}}</p>
+    
+        {% if todo.complete_check == False%}
+        <span class="ui grey label">Task not completed</span>
+        {%else%}
+        <span class="ui green label">Task completed</span>
+    
+        {% endif %}
+        
+    
+        <a class="ui blue button" href="/update/{{todo.id}}">Update Task</a>
+        <a class="ui red button" href="/delete/{{todo.id}}">Delete Task</a>
+        {% endfor%}
+
+
+    </div>
+    
 </body>
 </html>
