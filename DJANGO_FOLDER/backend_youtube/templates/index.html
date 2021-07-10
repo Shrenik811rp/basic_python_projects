@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Home</title>
+<!-- to link css files from the static folder we have to add this line 
+{% load static %}
+- to link css file use jinja template {% folder_name file_name%}
+
+
+we have given path of file in settings.py for css files
+-->
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+	<h1>**Tell me about yourself**</h1>
+	<form action="counter" method="POST">
+       <!--csrf_token (Cross Site Request Forgery protection)
+		->ensures that only forms that have originated from trusted domains
+
+		-> is used to prevent error from ocurring when we use post method-->
+		{% csrf_token%}
+		<textarea name="text_input" id="" cols="100" rows="20"></textarea>
+		<br>
+		<input type="submit" />
+	</form>
+</body>
+</html>
