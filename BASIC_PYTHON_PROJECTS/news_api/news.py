@@ -1,11 +1,11 @@
-# api key: 9c0093bb09c94ebdb13c203de47a6009
+# api key: USER'S API KEY
 
 import requests
 import tkinter as tk
 
 
 def get_news():
-	api_key = "9c0093bb09c94ebdb13c203de47a6009"
+	api_key = "API_KEY_FROM_NEWSAPI"
 	url = "https://newsapi.org/v2/top-headlines?country=in&apiKey=" + api_key
 	news_link = requests.get(url).json()
 
