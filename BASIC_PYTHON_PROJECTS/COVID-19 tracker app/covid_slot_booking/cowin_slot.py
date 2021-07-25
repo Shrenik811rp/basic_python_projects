@@ -4,14 +4,14 @@ https://cdn-api.co-vin.in/api/v2/admin/location/states
 
 Sample booking info url:
 
-https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=265&date=30-07-2021
+https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=YOUR_STATE_ID&date=DD-MM-YYYY
 '''
 
 import requests
 import time
 
-district_id = 265
-appointment_date = '31-07-2021'
+district_id = YOUR_STATE_ID
+appointment_date = 'DD-MM-YYYY'
 
 setu_api = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id={}&date={}".format(district_id,appointment_date)
 
@@ -21,11 +21,20 @@ browser_support = {
 
 def book_slot():
 	nos_locations = 0
+	
+	#get data from the setu-api url 
 	vaccine_request = requests.get(setu_api,headers=browser_support)
 
+	# convert the data into json format
 	vaccine_data = vaccine_request.json()
+	
+	#extract all vacccine info according to your will from 'sessions' 
 	booking_details = vaccine_data["sessions"]
+	
+	# looping through each vaccination center
 	for loc in booking_details:
+		
+		# conditions the vaccination center should meet
 		if(((loc["available_capacity"]> 0) and (loc['min_age_limit'] >=18) and (loc["fee_type"] == "Paid")) or ((loc["available_capacity"]> 0) and (loc['min_age_limit'] >=18) or (loc["fee_type"] == "Paid")) ):
 			nos_locations += 1
 			print(f"\n\nVaccination center : {loc['name']}\n")	
@@ -36,11 +45,12 @@ def book_slot():
 			print(f"Vaccine fee : ₹{loc['fee']} Rupees\n")
 			print(f"Vaccination availablity: {loc['available_capacity']}\n")
 			print(f"Vaccination center slots : {loc['slots']}\n")
+			print(f"Nos of vaccination centers found : {nos_locations}\n")
 			return True
 		if( nos_locations == 0):
 			continue
 
 
 while(book_slot() != True):
-	time.sleep(4)
+	time.sleep(2)
 	book_slot()
