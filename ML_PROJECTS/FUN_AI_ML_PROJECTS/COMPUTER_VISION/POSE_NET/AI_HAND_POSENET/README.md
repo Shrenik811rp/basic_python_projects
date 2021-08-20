@@ -1,1 +1,1 @@
-#AI Hand Pose Estimation with MediaPipe and Python
+# AI Hand Pose Estimation with MediaPipe and Python
