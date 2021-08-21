@@ -1,0 +1,1 @@
+This document aims to track the progress in the usage of Deep Learning (DL) applied to human mobility and give an overview of the state-of-the-art across the most common tasks and their corresponding datasets. 
